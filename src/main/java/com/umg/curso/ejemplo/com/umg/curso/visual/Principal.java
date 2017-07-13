@@ -3,10 +3,7 @@ package com.umg.curso.ejemplo.com.umg.curso.visual;
 import com.umg.curso.ejemplo.domain.Estudiante;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Grid;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
 /**
@@ -19,7 +16,20 @@ public class Principal extends UI {
     protected void init(VaadinRequest vaadinRequest) {
         VerticalLayout layout = new VerticalLayout();
 
-        Button addEstudianteButton=new Button();
+        TextField txtNombre = new TextField("Ingrese un nombre");
+        TextField txtEdad= new TextField("Ingrese la edad");
+        final Button addEstudianteButton=new Button("Haz clic!",
+                new Button.ClickListener() {
+                    @Override
+                    public void buttonClick(Button.ClickEvent clickEvent) {
+                        clickEvent.getButton().setCaption("Listo!!");
+                    }
+
+                    //@Override
+                    //public void buttonClick(ClickEvent event) {
+                      //  event.getButton().setCaption("Done!");
+                    //}
+                });
         //addEstudianteButton.
 
         Grid<Estudiante> grid=new Grid<>();
@@ -27,7 +37,12 @@ public class Principal extends UI {
         grid.addColumn(Estudiante::getEdad).setCaption("Edad");
 
 
+
+        layout.addComponent(txtNombre);
+        layout.addComponent(txtEdad);
+        layout.addComponent(addEstudianteButton);
         layout.addComponent(grid);
+
 
         setContent(layout);
 
